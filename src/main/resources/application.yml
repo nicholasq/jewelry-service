@@ -1,0 +1,3 @@
+service:
+  contact:
+    base-path: /api/v1/contacts

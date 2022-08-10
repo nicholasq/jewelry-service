@@ -1,0 +1,14 @@
+POST {{protocol}}{{host}}:{{port}}/api/v1/contacts
+Content-Type: application/json
+
+{
+  "firstName": "John"
+}
+###
+
+GET {{protocol}}{{host}}:{{port}}{{contact-path}}
+Content-Type: application/json
+###
+
+GET {{protocol}}{{host}}:{{port}}
+Content-Type: application/json
