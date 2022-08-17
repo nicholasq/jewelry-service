@@ -1,3 +1,7 @@
-service:
-  contact:
+gcloud:
+  projectId: ${GCP_PROJECT_ID:#{'test'}}
+contact:
+  firestore:
+    collection: contacts
+  api:
     base-path: /api/v1/contacts

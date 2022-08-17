@@ -1,13 +1,9 @@
 package xyz.nicholasq.jewelryservice.infrastructure.data
 
-import org.springframework.beans.factory.annotation.Value
-import org.springframework.stereotype.Component
 import org.testcontainers.containers.FirestoreEmulatorContainer
 import org.testcontainers.utility.DockerImageName
 
-@Component
 class FirestoreEmulator(
-    @param:Value("\${firestore-image}")
     private val image: String
 ) {
 

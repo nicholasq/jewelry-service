@@ -6,13 +6,12 @@ import io.restassured.builder.ResponseSpecBuilder
 import io.restassured.filter.log.RequestLoggingFilter
 import io.restassured.filter.log.ResponseLoggingFilter
 import io.restassured.http.ContentType
-import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.web.server.LocalServerPort
 import xyz.nicholasq.jewelryservice.infrastructure.data.FirestoreEmulator
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 abstract class AbstractIntegrationTest {
 
     @Autowired
@@ -29,8 +28,13 @@ abstract class AbstractIntegrationTest {
         }
     }
 
-    @BeforeEach
+    @BeforeAll
     fun init() {
+        firestoreEmulator.startFirestoreDb()
+    }
+
+    @BeforeEach
+    fun initEach() {
         RestAssured.baseURI = "http://localhost"
         RestAssured.port = port.toInt()
         RestAssured.requestSpecification = RequestSpecBuilder()
@@ -39,13 +43,15 @@ abstract class AbstractIntegrationTest {
             .build()
         RestAssured.responseSpecification = ResponseSpecBuilder()
             .build()
-
-        firestoreEmulator.startFirestoreDb()
     }
 
     @AfterEach
     fun clear() {
         RestAssured.reset()
+    }
+
+    @AfterAll
+    fun cleanUp() {
         firestoreEmulator.closeFirestoreDb()
     }
 }

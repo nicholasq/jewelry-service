@@ -2,17 +2,19 @@ package xyz.nicholasq.jewelryservice.domain.contact.api
 
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.http.HttpStatus
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 import xyz.nicholasq.jewelryservice.infrastructure.api.CrudController
 
-@RestController("contactController")
-@RequestMapping("\${service.contact.base-path}")
-class ContactController(@param:Qualifier("baseCrudController") private val crudController: CrudController<Contact>) :
-    CrudController<Contact> {
+@RestController
+@RequestMapping("\${contact.api.base-path}")
+class ContactController(
+    @param:Qualifier("defaultContactController") private val crudController: CrudController<Contact, String>
+) : CrudController<Contact, String> {
 
     @PostMapping
-    override suspend fun create(@RequestBody createCommand: Contact): Contact {
-        return crudController.create(createCommand)
+    override suspend fun create(@Validated @RequestBody resource: Contact): Contact {
+        return crudController.create(resource)
     }
 
     @GetMapping("/{id}")
@@ -21,8 +23,8 @@ class ContactController(@param:Qualifier("baseCrudController") private val crudC
     }
 
     @PutMapping("/{id}")
-    override suspend fun update(@PathVariable("id") id: String, @RequestBody updateCommand: Contact): Contact {
-        return crudController.update(id, updateCommand)
+    override suspend fun update(@PathVariable("id") id: String, @RequestBody resource: Contact): Contact {
+        return crudController.update(id, resource)
     }
 
     @DeleteMapping("/{id}")

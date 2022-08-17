@@ -28,6 +28,9 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
+    implementation(platform("com.google.cloud:libraries-bom:26.0.0"))
+    implementation("com.google.cloud:google-cloud-firestore")
+
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
 

@@ -7,4 +7,8 @@ spring:
     activate:
       on-profile: test-local
 firestore-image: gcr.io/google.com/cloudsdktool/cloud-sdk:367.0.0-emulators
+logging:
+  level:
+    root: DEBUG
+    xyz.nicholasq.jewelryservice: DEBUG
 ---
