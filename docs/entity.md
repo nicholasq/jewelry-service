@@ -20,30 +20,30 @@ erDiagram
     PIPELINE ||--o{ PHASE : has
     PIPELINE {
         string id
-        string name
         string creation_date
         string last_update_date
+        string name
         string description
     }
     PHASE ||--o{ JOB : contains
     PHASE {
         string id
         string pipeline_id
-        string name
         string creation_date
         string last_update_date
+        string name
         string description
     }
     JOB ||--o{ CONTACT : contains
     JOB {
         string id
         string phase_id
-        number order
-        string priority
-        string name
         string creation_date
         string last_update_date
+        string name
         string description
+        string priority
+        number order
         string notes
     }
     CONTACT {

@@ -1,7 +1,7 @@
 package xyz.nicholasq.jewelryservice.infrastructure.service
 
 import org.slf4j.Logger
-import xyz.nicholasq.jewelryservice.infrastructure.api.Dto
+import xyz.nicholasq.jewelryservice.infrastructure.api.Resource
 import xyz.nicholasq.jewelryservice.infrastructure.data.AsyncCrudRepository
 import xyz.nicholasq.jewelryservice.infrastructure.data.Entity
 import xyz.nicholasq.jewelryservice.infrastructure.mapper.DomainObjectMapper
@@ -14,7 +14,7 @@ interface CrudService<T, ID> {
     suspend fun delete(id: ID): Boolean
 }
 
-class BaseCrudService<T1 : Dto, T2 : Entity, ID>(
+class BaseCrudService<T1 : Resource, T2 : Entity, ID>(
     private val domainObjectMapper: DomainObjectMapper<T1, T2>,
     private val repository: AsyncCrudRepository<T2, ID>,
     private val logger: Logger

@@ -1,22 +1,22 @@
 package xyz.nicholasq.jewelryservice.infrastructure.mapper
 
-import xyz.nicholasq.jewelryservice.infrastructure.api.Dto
+import xyz.nicholasq.jewelryservice.infrastructure.api.Resource
 import xyz.nicholasq.jewelryservice.infrastructure.data.Entity
 
 interface ObjectMapper<T1, T2> {
     fun map(obj: T1): T2
 }
 
-interface EntityToDtoObjectMapper<T1 : Entity, T2 : Dto> : ObjectMapper<T1, T2>
+interface EntityToDtoObjectMapper<T1 : Entity, T2 : Resource> : ObjectMapper<T1, T2>
 
-interface DtoToEntityObjectMapper<T1 : Dto, T2 : Entity> : ObjectMapper<T1, T2>
+interface DtoToEntityObjectMapper<T1 : Resource, T2 : Entity> : ObjectMapper<T1, T2>
 
-interface DomainObjectMapper<T1 : Dto, T2 : Entity> {
+interface DomainObjectMapper<T1 : Resource, T2 : Entity> {
     fun toEntity(obj: T1): T2
     fun toDto(obj: T2): T1
 }
 
-class DefaultDomainObjectMapper<T1 : Dto, T2 : Entity>(
+class DefaultDomainObjectMapper<T1 : Resource, T2 : Entity>(
     private val dtoToEntityObjectMapper: DtoToEntityObjectMapper<T1, T2>,
     private val entityToDtoObjectMapper: EntityToDtoObjectMapper<T2, T1>
 ) : DomainObjectMapper<T1, T2> {

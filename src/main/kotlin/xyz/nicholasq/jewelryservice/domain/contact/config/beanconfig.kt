@@ -42,7 +42,7 @@ class ContactCrudConfig : CrudConfig<Contact, ContactEntity, String> {
         return BaseCrudController(crudService(), LoggerFactory.getLogger(ContactController::class.java))
     }
 
-    @Bean
+    @Bean("contactCrudService")
     override fun crudService(): CrudService<Contact, String> {
         return BaseCrudService(
             domainObjectMapper(),
@@ -51,7 +51,7 @@ class ContactCrudConfig : CrudConfig<Contact, ContactEntity, String> {
         )
     }
 
-    @Bean
+    @Bean("contactCrudRepository")
     override fun crudRepository(): AsyncCrudRepository<ContactEntity, String> {
         return ContactRepositoryImpl(
             dataSource.get(),
@@ -60,7 +60,7 @@ class ContactCrudConfig : CrudConfig<Contact, ContactEntity, String> {
         )
     }
 
-    @Bean
+    @Bean("contactDomainObjectMapper")
     override fun domainObjectMapper(): DomainObjectMapper<Contact, ContactEntity> {
         return DefaultDomainObjectMapper(ContactToEntityMapper(), EntityToContactMapper())
     }
